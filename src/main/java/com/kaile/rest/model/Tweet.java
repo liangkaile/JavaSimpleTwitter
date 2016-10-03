@@ -1,4 +1,4 @@
-package com.kaile.model;
+package com.kaile.rest.model;
 
 import org.bson.types.ObjectId;
 import org.mongodb.morphia.annotations.Entity;

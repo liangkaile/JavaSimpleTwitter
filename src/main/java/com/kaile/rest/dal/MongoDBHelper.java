@@ -1,4 +1,4 @@
-package com.kaile;
+package com.kaile.rest.dal;
 
 import java.util.ResourceBundle;
 import org.mongodb.morphia.Datastore;

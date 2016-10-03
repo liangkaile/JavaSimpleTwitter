@@ -10,11 +10,12 @@ import org.mongodb.morphia.query.Query;
 
 import java.util.ArrayList;
 import java.util.List;
-import com.kaile.MongoDBHelper;
-import com.kaile.model.User;
+
 import com.kaile.rest.exception.AppException;
+import com.kaile.rest.model.Tweet;
+import com.kaile.rest.model.User;
+import com.kaile.rest.dal.MongoDBHelper;
 import com.kaile.rest.exception.AppError;
-import com.kaile.model.Tweet;
 
 @Path("feed")
 public class Feed {

@@ -16,10 +16,10 @@ import org.mongodb.morphia.Morphia;
 import java.util.List;
 import java.util.ArrayList;
 
-import com.kaile.model.User;
+import com.kaile.rest.dal.MongoDBHelper;
 import com.kaile.rest.exception.AppError;
 import com.kaile.rest.exception.AppException;
-import com.kaile.MongoDBHelper;
+import com.kaile.rest.model.User;
 
 @Path("users")
 public class Users {
@@ -93,7 +93,7 @@ public class Users {
     	}
     	
         ds.save(user);
-        return Response.status(201).entity(user).build();
+        return Response.status(200).entity(user).build();
     }
     
 }
