@@ -1,7 +1,7 @@
-User Story:
+# User Story:
 As part of enhancing our internal services which are available to our employees, we would like to build a Twitter like solution for our employees, where employees can tweet and have followers.
 
-High Level Requirements :
+# High Level Requirements :
 * We have 10K employees
 * Employees can follow their colleagues, post (or tweet) messages to their followers
 * Use corporate LDAP for user Management
@@ -13,25 +13,28 @@ High Level Requirements :
 * You are expected to explain the rationale for your choice of technologies and architectural patterns
 
 
-Programming Problem:
+# Programming Problem:
 In the above exercise, please build a RESTful service
 * /feed : To list 100 recent tweets for the logged in user
 * In memory database is sufficient. Optionally, you are welcome to use a persistent data store of your choice.
 * You are encouraged but not required to take advantage of a service code-generation framework of your choice when performing this exercise
 
-Framework:
+# Framework:
 1 Jersey: https://jersey.java.net/
 
-Installation:
+# Installation:
 1) mvn install
 
-Run test:
+# Run test:
 1) mvn test
 
-Running the project:
+# Running the project:
 1) deploy war file to tomcat
 
-Sample commands:
+# Postman collection
+https://www.getpostman.com/collections/7a3ef818df5775657360
+
+# Sample curl commands:
 1) create user
 curl -X POST -H "Content-Type: application/json" -d '{
   "name": "intuit",
