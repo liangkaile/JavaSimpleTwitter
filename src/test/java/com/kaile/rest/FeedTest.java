@@ -17,7 +17,7 @@ public class FeedTest extends JerseyTest {
 
     @Test
     public void test() {
-        Response response = target("feed").request().get();
+        Response response = target("feed").request().header("user", "kaile").get();
         assertEquals(response.getStatusInfo(), Response.Status.OK);
     }
 }
