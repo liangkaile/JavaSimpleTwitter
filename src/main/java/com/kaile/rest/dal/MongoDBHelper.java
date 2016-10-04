@@ -10,7 +10,7 @@ public class MongoDBHelper {
     private static MongoClient mongoSingleton = null;
     private static Morphia morphia = new Morphia();
 
-    static synchronized MongoClient getMongoClient() {
+    private static MongoClient getMongoClient() {
         //Double-Checked Locking idiom
         if (mongoSingleton == null) {
 
