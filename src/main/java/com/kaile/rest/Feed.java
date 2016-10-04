@@ -9,6 +9,9 @@ import org.mongodb.morphia.Morphia;
 import org.mongodb.morphia.query.Query;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.Date;
 import java.util.List;
 
 import com.kaile.rest.exception.AppException;
@@ -43,7 +46,7 @@ public class Feed {
 
         if (user != null && user.getName() != null) {
             Query<Tweet> query = Feed.ds.createQuery(Tweet.class)
-                    .field("user").equal(user.getName()).limit(Feed.LIMIT);
+                    .field("user").equal(user.getName()).order("-creationDate").limit(Feed.LIMIT);
 
             return new ArrayList<>(query.asList());
         } else {	
@@ -65,12 +68,23 @@ public class Feed {
                 .filter("name", name).get();
 
         if (user == null) {
+        	
         	throw new AppException(400, AppError.USER_NOT_FOUND);
+        	
         }else if(user.getFollowNames() != null) {
-            Query<Tweet> query = Feed.ds.createQuery(Tweet.class)
-                    .field("user").in(user.getFollowNames()).limit(Feed.LIMIT);
-
-            return new ArrayList<>(query.asList());
+        	List<Tweet> result = new ArrayList<Tweet>();
+        	for(String followName : user.getFollowNames()){
+	            Query<Tweet> query = Feed.ds.createQuery(Tweet.class)
+	                    .field("user").equal(followName).order("-creationDate").limit(Feed.LIMIT);
+	            result.addAll(query.asList());
+	            
+	            Collections.sort(result, new Comparator<Tweet>(){
+	            	public int compare(Tweet t1, Tweet t2) {
+	            		return - t1.getCreationDate().compareTo(t2.getCreationDate());
+	            	}
+	            });
+        	}
+            return result.subList(0, Feed.LIMIT);
         }
 
         return new ArrayList<>();
@@ -95,6 +109,7 @@ public class Feed {
         if (user == null) {
         	throw new AppException(400, AppError.USER_NOT_FOUND);
         } else {
+        	 tweet.setCreationDate(new Date());
         	 ds.save(tweet);
              return Response.status(201).entity(tweet).build();
         }
